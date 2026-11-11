@@ -1,0 +1,32 @@
+{
+  "rungs": ["A0", "A1", "A2", "B0", "B1", "B2"],
+  "posterior_rungs": ["A1", "A2", "B1", "B2"],
+  "posterior_draws": 100,
+  "logistic": {
+    "prior_precision_grid": [0.01, 0.1, 1.0, 3.0, 10.0, 30.0],
+    "a0_prior_precision": 0.0,
+    "a2_structure_prior": "beta-binomial",
+    "a2_prior_rho": 0.5
+  },
+  "trees": {
+    "max_depth": 12,
+    "min_leaf": 10,
+    "dirichlet_concentration_per_class": "1/C",
+    "split_thresholds": "training-fold quantiles",
+    "b2_mcmc": {
+      "n_chains": 8,
+      "n_iter": 2000,
+      "burn_in": "n_iter // 4",
+      "thin": "n_iter // 40",
+      "moves": ["grow", "prune", "change"]
+    },
+    "b2_mcmc_iter_for_shift_and_training_size": 1000
+  },
+  "seeds": {
+    "fold": "fold index (0-14, subjects in sorted order)",
+    "a1_draws": "1000 + fold",
+    "b1_draws": "2000 + fold",
+    "b2_predict": "3000 + fold",
+    "b2_chain": "fold + 7919 * chain"
+  }
+}

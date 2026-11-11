@@ -1,0 +1,6 @@
+{
+  "butqdb_root": "data/but-qdb",
+  "ltstdb_root": "data/ltstdb",
+  "nstdb_root": "data/nstdb",
+  "results_root": "results"
+}

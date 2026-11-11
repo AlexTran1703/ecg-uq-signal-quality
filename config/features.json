@@ -1,0 +1,41 @@
+{
+  "mechanisms": {
+    "E1": {"source": "ECG", "description": "detectability/morphology", "columns": ["ECG_qSQI", "ECG_template_corr"]},
+    "E2": {"source": "ECG", "description": "rhythm plausibility", "columns": ["ECG_HR_mean", "ECG_RR_max", "ECG_RR_ratio"]},
+    "E3": {"source": "ECG", "description": "spectral contamination", "columns": ["ECG_pSQI", "ECG_basSQI", "ECG_HF_ratio", "ECG_line50_ratio"]},
+    "E4": {"source": "ECG", "description": "statistical/complexity", "columns": ["ECG_kSQI", "ECG_MSE"]},
+    "M1": {"source": "ACC", "description": "motion magnitude", "columns": ["ACC_ENMO", "ACC_MAD"]},
+    "M2": {"source": "ACC", "description": "motion dynamics", "columns": ["ACC_jerk_rms", "ACC_dom_freq", "ACC_spec_entropy"]},
+    "M3": {"source": "cross-modal", "description": "ECG-motion coupling", "columns": ["CPL_vel_xcorr", "CPL_vel_coh"]}
+  },
+  "selected_representation": "E3+E4+M2",
+  "ecg": {
+    "qrs_detector_a_band_hz": [5.0, 20.0],
+    "qrs_detector_b_band_hz": [5.0, 25.0],
+    "qrs_detector_b_smoothing_s": 0.12,
+    "peak_refractory_s": 0.25,
+    "peak_prominence_mad": {"detector_a": 1.5, "detector_b": 3.0},
+    "beat_match_tolerance_s": 0.15,
+    "template_window_s": [-0.20, 0.40],
+    "welch_nperseg": 1024,
+    "bands_hz": {
+      "pSQI": {"numerator": [5, 15], "denominator": [5, 40]},
+      "basSQI": {"numerator": [0.5, 1], "denominator": [0.5, 40]},
+      "HF_ratio": {"numerator": [40, 100], "denominator": [0.5, 100]},
+      "line50_ratio": {"numerator": [49, 51], "denominator": [0.5, 100]}
+    },
+    "kurtosis": "fourth moment of the z-scored window",
+    "multiscale_entropy": {"decimate_to_hz": 50, "scales": [1, 2, 3], "m": 2, "r_fraction_of_sd": 0.15}
+  },
+  "accelerometer": {
+    "units": "milli-g, converted to g",
+    "welch_nperseg": 256,
+    "velocity_highpass_hz": 0.3
+  },
+  "cross_modal": {
+    "ecg_band_hz": [0.5, 10.0],
+    "qrs_excision_half_width_s": 0.080,
+    "coherence_nperseg": 256,
+    "xcorr_max_lag_s": 0.5
+  }
+}

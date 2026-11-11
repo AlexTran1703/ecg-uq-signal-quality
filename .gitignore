@@ -1,0 +1,8 @@
+results/
+data/
+config/paths.local.json
+__pycache__/
+*.pyc
+.venv/
+*_result
+*_cache

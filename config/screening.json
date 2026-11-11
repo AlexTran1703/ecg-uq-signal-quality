@@ -1,0 +1,8 @@
+{
+  "model": "S0: MAP multinomial logistic, prior precision selected by evidence on the training split",
+  "n_splits": 5,
+  "split": "GroupKFold by subject",
+  "ranking": ["NLL", "Brier", "ECE", "n_features"],
+  "ties": {"nll_tolerance": 0.005, "brier_tolerance": 0.005, "ece_tolerance": 0.010},
+  "prevalence_top_fraction": 0.10
+}

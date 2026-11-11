@@ -1,0 +1,21 @@
+{
+  "nstdb": {
+    "records": {"bw": "baseline wander", "em": "electrode motion", "ma": "muscle artifact"},
+    "channel": 0,
+    "fs_hz": 360,
+    "resampling": "polyphase 360 -> 250 Hz",
+    "snr_db": ["clean", 24, 18, 12, 6, 0, -6],
+    "mixing": "x + lambda * n, lambda = sqrt(P_signal / (P_noise * 10^(SNR/10))), powers about the window mean, independent random noise offset per window",
+    "noise_seed": "fold index"
+  },
+  "synthetic_mains": {"levels": [0.0, 0.25, 0.5, 1.0, 2.0], "fundamental_hz": 50, "harmonic_hz": 100, "harmonic_relative_amplitude": 0.333},
+  "feature_diagnostics": {"artifact": "ma", "snr_db": ["clean", 0, -6], "ablation_model": "A2", "ablation_contrast_db": -6},
+  "ltstdb": {
+    "lead": 0,
+    "guard_s": 30.0,
+    "states": {"clean": "r_U = 0", "transition": "0 < r_U < 1", "unreadable": "r_U = 1"},
+    "min_windows_per_state": 4,
+    "novelty_k": 50,
+    "mains_check": {"line_hz": [50, 60], "half_width_hz": 1.0, "threshold_fraction": 0.05}
+  }
+}
